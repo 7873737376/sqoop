@@ -5,6 +5,7 @@
 *.ear
 /pkg
 /yum-cdh
+/build
 
 # Logs and databases #
 ######################
