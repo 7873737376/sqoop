@@ -246,6 +246,12 @@ public class HiveImport {
 			}
 		}
 
+		
+		String finaleHiveQuery = tableWriter.getCreateTableStmt() + "\n";
+		if (!createOnly)
+			finaleHiveQuery += "LOCATION '"+finalPath+"';";
+		else
+			finaleHiveQuery+=";";
 		// write them to a script file.
 		File scriptFile = getScriptFile(outputTableName);
 		try {
@@ -254,10 +260,11 @@ public class HiveImport {
 			try {
 				FileOutputStream fos = new FileOutputStream(scriptFile);
 				w = new BufferedWriter(new OutputStreamWriter(fos));
-				w.write(createTableStr, 0, createTableStr.length());
-				if (!createOnly) {
-					w.write(loadDataStmtStr, 0, loadDataStmtStr.length());
-				}
+				w.write( finaleHiveQuery, 0, finaleHiveQuery.length() );
+				//w.write(createTableStr, 0, createTableStr.length());
+				//if (!createOnly) {
+				//	w.write(loadDataStmtStr, 0, loadDataStmtStr.length());
+				//}
 			} catch (IOException ioe) {
 				LOG.error("Error writing Hive load-in script: " + ioe.toString());
 				ioe.printStackTrace();
