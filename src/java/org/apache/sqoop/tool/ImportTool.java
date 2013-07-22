@@ -424,10 +424,10 @@ public class ImportTool extends com.cloudera.sqoop.tool.BaseSqoopTool {
 
     // If the user wants this table to be in Hive, perform that post-load.
     if (options.doHiveImport()) {
-      //hiveImport.importTable(tableName, options.getHiveTableName(), false); getImportTable
-    	String table = hiveImport.getImportTable(tableName, options.getHiveTableName(), false);
+      hiveImport.importTable(tableName, options.getHiveTableName(), false);
+    	//String table = hiveImport.getImportTable(tableName, options.getHiveTableName(), false);
     	//LOG.debug("---> "+ table);
-    	System.out.println("%"+table+"%");
+    	//System.out.println("%"+table+"%");
     }
 
     saveIncrementalState(options);
